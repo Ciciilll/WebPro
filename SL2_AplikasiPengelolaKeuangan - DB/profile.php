@@ -73,10 +73,9 @@
                     <td>Foto Profil</td>
                     <td>
                         <div class="profile-image">
-                            <?php
-                                echo "<img src='".$profileData['profile']."'>";
-                                // echo "<a href='".$_SESSION['dirPlace'].$_SESSION['fileName']."'>".$_SESSION['fileName']."</a>";
-                            ?>
+                            <img src="data:<?php echo $profileData['profileType']; ?>;base64, <?php echo base64_encode($profileData['profileData']);?>" alt="">
+                                <!-- // echo "<img src='".$profileData['profile']."'>";
+                                // echo "<a href='".$_SESSION['dirPlace'].$_SESSION['fileName']."'>".$_SESSION['fileName']."</a>"; -->
                         </div>
                     </td>
                 </tr>

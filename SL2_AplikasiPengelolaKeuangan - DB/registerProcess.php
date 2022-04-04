@@ -19,32 +19,39 @@
         }
         if($flag != -1){
             //input image to Uploaded folder
-            $fileName = $_FILES['profile']['name'];
-            $tempName = $_FILES['profile']['tmp_name'];
+            // $fileName = $_FILES['profile']['name'];
+            // $tempName = $_FILES['profile']['tmp_name'];
     
-            $directory = "Uploaded/";
-            $toStore = $directory.$fileName;
-            $upload = move_uploaded_file($tempName, $toStore);
+            // $directory = "Uploaded/";
+            // $toStore = $directory.$fileName;
+            // $upload = move_uploaded_file($tempName, $toStore);
+
+            if($_FILES){
+                if(is_uploaded_file($_FILES['profile']['tmp_name'])){
+                    $profileData = addslashes(file_get_contents($_FILES['profile']['tmp_name']));
+                    $profileType = getimagesize($_FILES['profile']['tmp_name']);
+
+                    $str_query = "insert into user values(
+                        '".$_POST['namadepan']."',
+                        '".$_POST['namatengah']."',
+                        '".$_POST['namabelakang']."',
+                        '".$_POST['tempatlahir']."',
+                        '".$_POST['tanggallahir']."',
+                        '".$_POST['nik']."',
+                        '".$_POST['warganegara']."',
+                        '".$_POST['email']."',
+                        '".$_POST['nohp']."',
+                        '".$_POST['alamat']."',
+                        '".$_POST['kodepos']."',
+                        '".$_POST['username']."',
+                        '".$_POST['password1']."', 
+                        '".$profileType['mime']."',
+                        '".$profileData."'
+                    )";
             
-            $str_query = "insert into user values(
-                '".$_POST['namadepan']."',
-                '".$_POST['namatengah']."',
-                '".$_POST['namabelakang']."',
-                '".$_POST['tempatlahir']."',
-                '".$_POST['tanggallahir']."',
-                '".$_POST['nik']."',
-                '".$_POST['warganegara']."',
-                '".$_POST['email']."',
-                '".$_POST['nohp']."',
-                '".$_POST['alamat']."',
-                '".$_POST['kodepos']."',
-                '".$_POST['username']."',
-                '".$_POST['password1']."', 
-                '".$toStore."'
-            )";
-    
-            $query = mysqli_query($connection, $str_query);
-    
+                    $query = mysqli_query($connection, $str_query);
+                }
+            }
             if($query){
                 echo "<script> 
                     alert('Register Berhasil');

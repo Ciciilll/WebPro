@@ -75,18 +75,23 @@
                     <td></td>
                     <td>Foto Profil</td>
                     <td>
-                        <input type="file" name = "profile" style="width: 200px;" accept=".jpg, .jpeg, .png" required value="<?php echo $profileData['profile']?>">
+                        <div class="profile-image">
+                            <img src="data:<?php echo $profileData['profileType']; ?>;base64, <?php echo base64_encode($profileData['profileData']);?>" alt="">
+                            <input type="file" name = "new-profile" style="width: 200px;" accept=".jpg, .jpeg, .png">
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td>Username</td>
                     <td><input type="text" name="username"  value="<?php echo $profileData['username']?>" readonly></td>
                     <td></td>
-                    <td>Password 1</td>
-                    <td><input type="password" name="password1"  value="<?php echo $profileData['password']?>"></td>
                     <td></td>
-                    <td>Password 2</td>
-                    <td><input type="password" name="password2" value="<?php echo $profileData['password']?>"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password to Update</td>
+                    <td><input type="password" name="password1"  value="<?php echo $profileData['password']?>"></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -189,17 +194,13 @@
                 return false;
             }
             if(document.registerForm.password1.value == ""){
-                alert("password1 tidak boleh kosong");
+                alert("password tidak boleh kosong");
                 document.registerForm.password1.focus();
                 return false;
             }
-            if(document.registerForm.password2.value == ""){
-                alert("password2 tidak boleh kosong");
-                document.registerForm.password2.focus();
-                return false;
-            }
-            if(document.registerForm.password2.value != document.registerForm.password1.value){
-                alert("password 1 dan 2 harus sama");
+            if(document.registerForm.password1.value != "<?php echo $profileData['password']?>"){
+                alert("password salah, coba lagi");
+                document.registerForm.password1.focus();
                 return false;
             }
         }
