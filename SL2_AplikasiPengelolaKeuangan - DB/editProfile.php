@@ -91,7 +91,7 @@
                 </tr>
                 <tr>
                     <td>Confirm Password to Update</td>
-                    <td><input type="password" name="password1"  value="<?php echo $profileData['password']?>"></td>
+                    <td><input type="password" name="password1"></td>
                 </tr>
                 <tr>
                     <td></td>
